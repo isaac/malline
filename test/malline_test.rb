@@ -155,7 +155,7 @@ class MallineTest < Test::Unit::TestCase
 			tpl = Base.new(View.new)
 			html = File.read(File.join(File.dirname(__FILE__), 'kernel.org.html'))
 			mn = tpl.render(File.read(File.join(File.dirname(__FILE__), 'kernel.org.mn')))
-			assert_equal(html, mn)
+			assert_xml_equal(html, mn)
 		end
 	end
 
@@ -177,7 +177,7 @@ class MallineTest < Test::Unit::TestCase
 
 	def test_examples
 		Dir.glob(File.join(File.dirname(__FILE__), 'examples', '*.mn')).each do |file|
-			assert_equal(File.read(file.sub(/\.mn$/, '.target')),
+			assert_xml_equal(File.read(file.sub(/\.mn$/, '.target')),
 				Base.new(View.new).render(File.read(file))+"\n", file)
 		end
 	end

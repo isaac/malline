@@ -15,13 +15,43 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
+require "rexml/document"
+
 module Kernel
 	def xxx *args
 	end
 end
+
 module MallineTestHelpers
+	include REXML
 	Image = Struct.new "Image", :id, :url, :caption
-	def assert_xml_equal a, b
-		assert_equal a, b
+	def assert_xml_equal a, b, c=""
+		if convert(Document.new(a)) != convert(Document.new(b))
+			assert_equal a, b, c
+		else
+			assert true
+		end
+	rescue
+		assert_equal a, b, c
+	end
+	def attributes element
+		element.attributes.keys.sort.collect {|k| " #{k}=\"#{element.attributes[k]}\""}.join
+	end
+	# quick hack to compare two html files
+	def convert e
+		output = ''
+		if e.is_a?(Array)
+			e.each {|el| output << convert(el) }
+		elsif e.respond_to?(:children) or e.is_a?(Element)
+			output << "<#{e.name}"
+			output << attributes(e) if e.respond_to?(:has_attributes?) and e.has_attributes?
+			output << ">"
+			e.children.each {|el| output << convert(el) } unless e.children.empty?
+			output << "</#{e.name}>"
+		else
+			output << e.to_s
+		end
+		output
 	end
 end
+

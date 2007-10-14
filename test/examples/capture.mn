@@ -1,11 +1,13 @@
-@foo = capture do
-	div do
-		img :src => '/images/image.png'
-		br
-		span.caption 'Taken at the location of the event'
+div do
+	@foo = capture do
+		div do
+			img :src => '/images/image.png'
+			br
+			span.caption 'Taken at the location of the event'
+		end
 	end
-end
 
-h4 'Captured'
-self << @foo
-_'EOF'
+	h4 'Captured'
+	self << @foo
+	_'EOF'
+end
