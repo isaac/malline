@@ -1,0 +1,10 @@
+# Options can be changed directly in view
+malline :strict => false
+foo { bar }
+
+malline :strict => true
+begin
+	foo { bar }
+rescue NameError => n
+	div "strict mode is on (#{truncate n.to_s})"
+end

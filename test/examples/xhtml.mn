@@ -1,0 +1,11 @@
+# When using xhtml and Malline strict mode, no other tags can be used but XHTML tags.
+# See Rails integration for more info about configuration options
+xhtml do
+	head
+	body do
+		# Malline recognizes all self closing tags
+		hr
+		div
+		br
+	end
+end

@@ -1,0 +1,5 @@
+p do
+	# These two do exactly the same
+	self << link_to('Frontpage', '/')
+	_link_to('Frontpage', '/')
+end

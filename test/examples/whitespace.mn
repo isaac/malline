@@ -1,0 +1,9 @@
+# Without automatic whitespace
+div do
+	_'This is'; strong 'so'; _'cool.'
+end
+
+# With automatic whitespace
+div :whitespace do
+	_'This is'; strong 'so'; _'cool.'
+end

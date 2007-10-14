@@ -1,0 +1,5 @@
+div do
+	_render :partial => 'examples/one'
+	br
+	_render :partial => 'examples/three'
+end

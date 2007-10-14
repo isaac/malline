@@ -1,0 +1,8 @@
+xhtml do
+	head do
+		title @title
+	end
+	body do
+		self << @content_for_layout
+	end
+end

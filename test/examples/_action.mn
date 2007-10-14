@@ -1,0 +1,4 @@
+@title = 'Data'
+ul.data! do
+	3.times {|i| li "Data #{i}" }
+end

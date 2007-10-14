@@ -1,0 +1,4 @@
+p do
+	hr
+	_'This is some text.'
+end

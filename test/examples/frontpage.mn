@@ -1,0 +1,6 @@
+div.page do
+	h1 'Header one'
+	ul.list! do
+		li { a 'Link to somewhere', :href => '/foo' }
+	end
+end

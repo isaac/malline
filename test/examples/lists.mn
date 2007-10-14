@@ -1,0 +1,13 @@
+@elements = %w{ these are some sample list elements }
+filter = /s../
+
+div.lists! do
+	h2 "Cool, you have #{@elements.size} elements!"
+	ul do
+		@elements.each do |name|
+			li name do
+				_' [matches filter]' if name =~ filter
+			end	
+		end
+	end
+end unless @elements.empty?

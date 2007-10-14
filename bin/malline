@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+$: << File.join(File.dirname(__FILE__), '..', 'lib')
+require 'malline.rb'
+
+nonstrict = ARGV.delete('-ns')
+
+input = File.open(ARGV.shift, 'r') rescue $stdin
+output = File.open(ARGV.shift, 'w') rescue $stdout
+
+if File.exists?('malline_helper.rb')
+	require 'malline_helper.rb'
+	view = MallineHelper.new
+else
+	view = nil
+end
+
+mn = Malline::Base.new(view, :strict => (nonstrict ? false : true))
+
+output.puts mn.render(input.read)

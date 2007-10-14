@@ -1,0 +1,4 @@
+p 'Do you know, that 2 < 5?', :title => '2 < 5'
+p do
+	_'Me & Myself & Malline'
+end

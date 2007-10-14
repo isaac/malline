@@ -1,0 +1,657 @@
+html 'xmlns' => 'http://www.w3.org/1999/xhtml' do
+	head do
+		meta 'content' => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'
+		title 'The Linux Kernel Archives'
+		link 'href' => 'favicon.ico', 'rel' => 'icon', 'type' => 'image/png'
+		link 'href' => 'http://kernel.org/kdist/rss.xml', 'title' => 'Latest Linux Kernel Version RSS', 'rel' => 'alternate', 'type' => 'application/rss+xml'
+		link 'href' => '/kernel.css', 'rel' => 'stylesheet', 'type' => 'text/css'
+	end
+	body do
+		h1 do
+			a 'href' => '970313.08.txt' do
+				img 'src' => 'images/korg10yr.gif', 'alt' => 'Ten Years of Kernel.org'
+			end
+			txt! 'The Linux Kernel Archives'
+		end
+		p.headtext 'Welcome to the Linux Kernel Archives. This is the primary site
+for the Linux kernel source, but it has much more than just
+Linux kernels.'
+		div.directory! do
+			table 'style' => 'margin-top:10px' do
+				tr do
+					th 'Protocol'
+					th 'Location'
+				end
+				tr do
+					td do
+						a 'HTTP', 'href' => 'http://www.ietf.org/rfc/rfc2616.txt'
+					end
+					td do
+						a 'http://www.kernel.org/pub/', 'href' => 'http://www.kernel.org/pub/'
+					end
+				end
+				tr do
+					td do
+						a 'FTP', 'href' => 'http://www.ietf.org/rfc/rfc959.txt'
+					end
+					td do
+						a 'ftp://ftp.kernel.org/pub/', 'href' => 'ftp://ftp.kernel.org/pub/'
+					end
+				end
+				tr do
+					td do
+						a 'RSYNC', 'href' => 'http://rsync.samba.org/'
+					end
+					td 'rsync://rsync.kernel.org/pub/'
+				end
+			end
+		end
+		div.versions! do
+			table.kver do
+				tr 'align' => 'left' do
+					td 'The latest stable version of the Linux kernel is:&nbsp;'
+					td do
+						b do
+							a '2.6.20.7', 'href' => '/pub/linux/kernel/v2.6/patch-2.6.20.7.bz2'
+						end
+					end
+					td '2007-04-13 20:54 UTC'
+					td do
+						a 'F', 'href' => '/pub/linux/kernel/v2.6/linux-2.6.20.7.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.6%2Fpatch-2.6.20.7.bz2'
+					end
+					td do
+						a 'VI', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.6%2Fincr%2Fpatch-2.6.20.6-7.bz2'
+					end
+					td do
+						a 'C', 'href' => 'http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Fstable%2Flinux-2.6.20.y.git;a=summary'
+					end
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.6/ChangeLog-2.6.20.7'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest' do
+						a 'prepatch', 'href' => 'http://kernel.org/patchtypes/pre.html'
+						txt! 'for the stable Linux kernel tree is:&nbsp;'
+					end
+					td do
+						b do
+							a '2.6.21-rc7', 'href' => '/pub/linux/kernel/v2.6/testing/patch-2.6.21-rc7.bz2'
+						end
+					end
+					td '2007-04-16 00:11 UTC'
+					td do
+						a 'B', 'href' => '/pub/linux/kernel/v2.6/linux-2.6.20.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.6%2Ftesting%2Fpatch-2.6.21-rc7.bz2'
+					end
+					td do
+						a 'VI', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.6%2Ftesting%2Fincr%2Fpatch-2.6.21-rc6-rc7.bz2'
+					end
+					td do
+						a 'C', 'href' => 'http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Ftorvalds%2Flinux-2.6.git;a=summary'
+					end
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.6/testing/ChangeLog-2.6.21-rc7'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest' do
+						a 'snapshot', 'href' => 'http://kernel.org/patchtypes/snapshot.html'
+						txt! 'for the stable Linux kernel tree is:&nbsp;'
+					end
+					td do
+						b do
+							a '2.6.21-rc7-git2', 'href' => '/pub/linux/kernel/v2.6/snapshots/patch-2.6.21-rc7-git2.bz2'
+						end
+					end
+					td '2007-04-18 07:01 UTC'
+					td do
+						a 'B', 'href' => '/pub/linux/kernel/v2.6/testing/linux-2.6.21-rc7.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.6%2Fsnapshots%2Fpatch-2.6.21-rc7-git2.bz2'
+					end
+					td '&nbsp;'
+					td do
+						a 'C', 'href' => 'http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Ftorvalds%2Flinux-2.6.git;a=summary'
+					end
+					td '&nbsp;'
+				end
+				tr 'align' => 'left' do
+					td 'The latest 2.4 version of the Linux kernel is:&nbsp;'
+					td do
+						b do
+							a '2.4.34.2', 'href' => '/pub/linux/kernel/v2.4/patch-2.4.34.2.bz2'
+						end
+					end
+					td '2007-03-24 08:26 UTC'
+					td do
+						a 'F', 'href' => '/pub/linux/kernel/v2.4/linux-2.4.34.2.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.4%2Fpatch-2.4.34.2.bz2'
+					end
+					td '&nbsp;'
+					td do
+						a 'C', 'href' => 'http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Fwtarreau%2Flinux-2.4.git;a=summary'
+					end
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.4/ChangeLog-2.4.34.2'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest' do
+						a 'prepatch', 'href' => 'http://kernel.org/patchtypes/pre.html'
+						txt! 'for the 2.4 Linux kernel tree is:&nbsp;'
+					end
+					td do
+						b do
+							a '2.4.35-pre2', 'href' => '/pub/linux/kernel/v2.4/testing/patch-2.4.35-pre2.bz2'
+						end
+					end
+					td '2007-03-24 07:42 UTC'
+					td do
+						a 'B', 'href' => '/pub/linux/kernel/v2.4/linux-2.4.34.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.4%2Ftesting%2Fpatch-2.4.35-pre2.bz2'
+					end
+					td do
+						a 'VI', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.4%2Ftesting%2Fincr%2Fpatch-2.4.35-pre1-pre2.bz2'
+					end
+					td do
+						a 'C', 'href' => 'http://git.kernel.org/?p=linux%2Fkernel%2Fgit%2Fwtarreau%2Flinux-2.4.git;a=summary'
+					end
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.4/testing/patch-2.4.35.log'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest 2.2 version of the Linux kernel is:&nbsp;'
+					td do
+						b do
+							a '2.2.26', 'href' => '/pub/linux/kernel/v2.2/patch-2.2.26.bz2'
+						end
+					end
+					td '2004-02-25 00:28 UTC'
+					td do
+						a 'F', 'href' => '/pub/linux/kernel/v2.2/linux-2.2.26.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.2%2Fpatch-2.2.26.bz2'
+					end
+					td '&nbsp;'
+					td '&nbsp;'
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.2/ChangeLog-2.2.26'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest' do
+						a 'prepatch', 'href' => 'http://kernel.org/patchtypes/pre.html'
+						txt! 'for the 2.2 Linux kernel tree is:&nbsp;'
+					end
+					td do
+						b do
+							a '2.2.27-rc2', 'href' => '/pub/linux/kernel/v2.2/testing/patch-2.2.27-rc2.bz2'
+						end
+					end
+					td '2005-01-12 23:55 UTC'
+					td do
+						a 'B', 'href' => '/pub/linux/kernel/v2.2/linux-2.2.26.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.2%2Ftesting%2Fpatch-2.2.27-rc2.bz2'
+					end
+					td do
+						a 'VI', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fv2.2%2Ftesting%2Fincr%2Fpatch-2.2.27-rc1-rc2.bz2'
+					end
+					td '&nbsp;'
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/v2.2/testing/patch-2.2.27.log'
+					end
+				end
+				tr 'align' => 'left' do
+					td 'The latest' do
+						a '-mm patch', 'href' => 'http://kernel.org/patchtypes/mm.html'
+						txt! 'to the stable Linux kernels is:&nbsp;'
+					end
+					td do
+						b do
+							a '2.6.21-rc6-mm1', 'href' => '/pub/linux/kernel/people/akpm/patches/2.6/2.6.21-rc6/2.6.21-rc6-mm1/2.6.21-rc6-mm1.bz2'
+						end
+					end
+					td '2007-04-08 21:09 UTC'
+					td do
+						a 'B', 'href' => '/pub/linux/kernel/v2.6/testing/linux-2.6.21-rc6.tar.bz2'
+					end
+					td do
+						a 'V', 'href' => 'http://www.kernel.org/diff/diffview.cgi?file=%2Fpub%2Flinux%2Fkernel%2Fpeople%2Fakpm%2Fpatches%2F2.6%2F2.6.21-rc6%2F2.6.21-rc6-mm1%2F2.6.21-rc6-mm1.bz2'
+					end
+					td '&nbsp;'
+					td '&nbsp;'
+					td do
+						a 'Changelog', 'href' => '/pub/linux/kernel/people/akpm/patches/2.6/2.6.21-rc6/2.6.21-rc6-mm1/announce.txt'
+					end
+				end
+			end
+			p.pvkey do
+				b 'F'
+				txt! '= full source,'
+				b 'B'
+				txt! '= patch baseline,'
+				b 'V'
+				txt! '= view patch,'
+				b 'VI'
+				txt! '= view incremental,'
+				b 'C'
+				txt! '= current'
+				a 'changesets', 'href' => 'changeset.html'
+				br
+				txt! "Changelogs are provided by the kernel authors directly. Please
+don't write the webmaster about them."
+				br
+				a 'Customize the patch viewer', 'href' => 'diff/config.html'
+			end
+		end
+		p.bandwidth do
+			a 'href' => 'http://zeus1.kernel.org/bw-zeus1.pdf' do
+				img 'src' => 'http://zeus1.kernel.org/bw-zeus1.png', 'height' => '128', 'alt' => 'zeus1 bwbar', 'style' => 'border:1px solid #bbd', 'width' => '240'
+			end
+			a 'href' => 'http://zeus2.kernel.org/bw-zeus2.pdf' do
+				img 'src' => 'http://zeus2.kernel.org/bw-zeus2.png', 'height' => '128', 'alt' => 'zeus2 bwbar', 'style' => 'border:1px solid #bbd', 'width' => '240'
+			end
+			a 'href' => 'http://git.kernel.org/bw-poseidon.pdf' do
+				img 'src' => 'http://git.kernel.org/bw-poseidon.png', 'alt' => 'git bwbar', 'style' => 'border:1px solid #bbd'
+			end
+		end
+		h2.news! 'Site News'
+		ul do
+			li.newsitem 'Apr 14, 2007:' do
+				strong 'Downtime'
+				txt! 'Kernel.org has some
+forced downtime on April 14 due to the circuit breakers
+powering zeus1 to be replaced.  This will be an extended
+downtime lasting several hours.  Estimated shutdown will be at
+13:00 UTC and the machine will likely come back up around
+17:00-18:00 UTC.'
+				br
+				txt! 'Be warned this downtime is likely to cause quite a bit of load
+on our remaining frontend machine so services will definately
+be degraded.  We apologize to all of you rushing out here to
+download the recently released (within the last 48 hours): Centos
+5, openSUSE 10.3 alpha 3, Linux Kernel 2.6.20.7 or the updates
+to Debian.'
+				br
+				txt! 'We cannot guarantee that mirrors.kernel.org will be available
+during the extent of the outage.  If load is excessive, we may
+be forced to close this service for the duration of the outage
+in order to protect higher priority services.'
+			end
+			li.newsitem 'Mar 13, 2007:' do
+				strong '10 years of kernel.org!'
+				txt! 'The
+Linux Kernel archives were'
+				a 'announced to the world on March 13,
+1997', 'href' => '970313.08.txt'
+				txt! '.  Thanks to everyone that has made kernel.org
+possible over the years, our sponsors, staff volunteers and of
+course the Linux community for making it a worthwhile effort
+in the first place!'
+			end
+			li.newsitem 'Mar 10, 2007: zeus1 is back online and serving all classes of traffic.  This concludes the maintenance window that started earlier this week.  The hope is that these changes will lower the loads experienced by the machines.' do
+				p 'Thanks for bearing with us the last couple of days - we know things were slow but we beat our expected restore date by 3 days (syncing 2.4TB of data across the internet is something we had previously experienced taking a week).  Happy downloading.'
+			end
+			li.newsitem 'Mar 1, 2007: We now have a' do
+				a 'dedicated git server', 'href' => 'http://git.kernel.org/'
+				txt! '.  This is
+the same HP DL380G2 which used to be our sole main server
+between 2001 and 2005.'
+				p 'This machine serves git protocol and gitweb only.  Please continue to use' do
+					i 'www.kernel.org'
+					txt! 'or'
+					i 'rsync.kernel.org'
+					txt! 'for http and
+rsync protocol users, respectively.'
+				end
+				p 'This machine was' do
+					a 'almost
+destroyed in shipping', 'href' => 'http://userweb.kernel.org/~warthog9/damaged_server/'
+					txt! ', but amazingly worked without issue on the first
+boot, and was serving the production git needs in less than 12 hours.'
+				end
+				txt! 'Kudos to both OSUOSL for getting the machine up as quickly as they did
+and to Hewlett Packard for building a machine that can take the beating
+of an unnamed shipping company and keep on ticking.'
+			end
+			li.newsitem 'It has now been five years since the kernel.org servers moved to' do
+				a 'ISC', 'href' => 'http://www.isc.org/'
+				txt! ".  Massive thanks to ISC
+and all of its sponsors for all the bandwidth we have eaten up
+over the years!  We'll continue to keep your wires warm for as
+long as you'll let us!"
+			end
+			li.newsitem 'Feb 4, 2006:' do
+				a 'Hewlett-Packard', 'href' => 'http://www.hp.com/'
+				txt! 'has been kind
+enough to replace our internal master server with a brand new'
+				a 'ProLiant&nbsp;DL385', 'href' => 'http://h18004.www1.hp.com/products/servers/proliantdl385/index.html'
+				txt! 'with a dual-core Opteron&nbsp;275 and 4&nbsp;GB of RAM.  Once
+again, huge thanks to HP!'
+			end
+			li.newsitem 'Sep 30, 2005:
+By popular demand, there is now a' do
+				a 'kernel.org FAQ', 'href' => '/faq/'
+				txt! '.'
+			end
+			li.newsitem 'Apr 9, 2005:
+We have put two new external servers, graciously donated by' do
+				a 'Hewlett-Packard', 'href' => 'http://www.hp.com/'
+				txt! 'into full production use.'
+				p 'These servers are both' do
+					a 'ProLiant&nbsp;DL585', 'href' => 'http://h18004.www1.hp.com/products/servers/proliantdl585/index.html'
+					txt! 'quad Opteron servers, each with 24&nbsp;GB of RAM and 10&nbsp;TB of disk.  Huge thanks to HP!'
+				end
+				p 'Each is connected to a separate' do
+					a 'ISC', 'href' => 'http://www.isc.org/'
+					txt! 'gigabit link.  Enjoy!'
+				end
+			end
+			li.newsitem "Aug 21, 2003:
+Please don't use" do
+				strong 'finger.kernel.org'
+				txt! 'for any
+sort of automatic monitoring. The number of automatic bots
+hitting this port is causing the finger daemon to shut down
+more often than not. The same information is available from'
+				a 'http://www.kernel.org/kdist/finger_banner', 'href' => 'http://www.kernel.org/kdist/finger_banner'
+				txt! '.'
+			end
+		end
+		h2.mirrors! 'The Linux Kernel Archives Mirror System'
+		p 'To improve access for everyone, a number of
+sites around the world have provided mirrors of this site, which
+may be faster to use than the master archive itself. Please see' do
+			a 'href' => '/mirrors/' do
+				strong 'http://www.kernel.org/mirrors/'
+			end
+			txt! 'for
+information about how to connect to a participating mirror site.'
+		end
+		p 'To guard against Trojan mirror sites, all files originating at
+the Linux Kernel Archives are' do
+			a 'cryptographically signed', 'href' => 'signature.html'
+			txt! '.'
+			em 'If you are
+getting a message that the verification key has expired, please
+see' do
+				a 'this link.', 'href' => 'signature.html#expire'
+			end
+		end
+		h2.whatislinux! 'What is Linux?'
+		p 'Linux is a clone of the operating system Unix,
+written from scratch by Linus Torvalds with assistance from a
+loosely-knit team of hackers across the Net. It aims towards
+POSIX and' do
+			a 'Single UNIX
+Specification', 'href' => 'http://www.unix-systems.org/'
+			txt! 'compliance.'
+		end
+		p 'It has all the features you would expect in a modern
+fully-fledged Unix, including true multitasking, virtual memory,
+shared libraries, demand loading, shared copy-on-write executables,
+proper memory management, and multistack networking including IPv4
+and IPv6.'
+		p 'Although originally developed first for 32-bit x86-based PCs (386 or
+higher), today Linux also runs on (at least) the' do
+			a 'Compaq Alpha AXP', 'href' => 'http://www.alphalinux.org/'
+			txt! ',
+Sun'
+			a 'SPARC', 'href' => 'http://www.ultralinux.org/'
+			txt! 'and'
+			a 'UltraSPARC', 'href' => 'http://www.ultralinux.org/'
+			txt! ','
+			a 'Motorola 68000', 'href' => 'http://www.linux-m68k.org/'
+			txt! ','
+			a 'PowerPC', 'href' => 'http://penguinppc.org/'
+			txt! ','
+			a 'ARM', 'href' => 'http://www.arm.linux.org.uk/'
+			txt! ','
+			a 'Hitachi SuperH', 'href' => 'http://linux-sh.org/'
+			txt! ','
+			a 'IBM S/390', 'href' => 'http://www.ibm.com/developerworks/linux/linux390/'
+			txt! ','
+			a 'MIPS', 'href' => 'http://www.linux-mips.org/'
+			txt! ','
+			a 'HP PA-RISC', 'href' => 'http://www.parisc-linux.org/'
+			txt! ','
+			a 'Intel IA-64', 'href' => 'http://www.ia64-linux.org/'
+			txt! ','
+			a 'DEC VAX', 'href' => 'http://linux-vax.sourceforge.net/'
+			txt! ','
+			a 'AMD x86-64', 'href' => 'http://www.x86-64.org/'
+			txt! ','
+			a 'AXIS CRIS', 'href' => 'http://developer.axis.com/software/linux/'
+			txt! ','
+			a 'Renesas M32R', 'href' => 'http://www.linux-m32r.org/'
+			txt! ', and'
+			a 'Atmel AVR32', 'href' => 'http://www.avr32linux.org/'
+			txt! 'architectures; for many of these architectures in both 32- and
+64-bit variants.'
+		end
+		p 'Linux is easily portable to most general-purpose 32- or 64-bit
+architectures as long as they have a paged memory management unit
+(PMMU) and a port of the GNU C compiler (gcc) (part of' do
+			a 'The GNU Compiler Collection, GCC', 'href' => 'http://gcc.gnu.org/'
+			txt! '). Linux
+has also been ported to a number of architectures without a PMMU,
+although functionality is then obviously somewhat limited. See the'
+			a 'µClinux project', 'href' => 'http://www.uclinux.org/'
+			txt! 'for more
+info.'
+		end
+		h2.newtolinux! 'New to Linux?'
+		p "If you're new to Linux, you don't want to download the kernel,
+which is just a component in a working Linux system. Instead, you
+want what is called a" do
+			em 'distribution'
+			txt! 'of Linux, which is a
+complete Linux system. There are numerous distributions available
+for download on the Internet as well as for purchase from various
+vendors; some are general-purpose, and some are optimized for
+specific uses. We currently have mirrors of several distributions
+available at'
+			a 'mirrors.kernel.org', 'href' => 'http://mirrors.kernel.org/'
+			txt! ',
+as well as a small collection of special-purpose distributions at'
+			a 'http://www.kernel.org/pub/dist/', 'href' => '/pub/dist/'
+			txt! '.'
+		end
+		p 'Note, however, that most distributions are very large (several
+gigabytes), so unless you have a' do
+			a 'fast Internet
+link', 'href' => 'fast.html'
+			txt! 'you may want to save yourself some hassle and purchase a
+CD-ROM with a distribution; such CD-ROMs are available from a number
+of vendors.'
+		end
+		p do
+			a 'The
+Linux Installation HOWTO', 'href' => 'http://mirrors.kernel.org/LDP/HOWTO/Installation-HOWTO/'
+			txt! 'has more information how to set up
+your first Linux system.'
+		end
+		h2.moreinfo! 'More Information'
+		p 'There is much' do
+			a 'information about Linux on the web', 'href' => 'links.html'
+			txt! '.'
+		end
+		h2.reportingbugs! 'Reporting Linux Kernel bugs'
+		p 'Please see' do
+			a 'href' => '/pub/linux/docs/lkml/reporting-bugs.html' do
+				strong 'http://www.kernel.org/pub/linux/docs/lkml/reporting-bugs.html'
+			end
+			txt! 'if you want to report a Linux kernel bug.'
+			em 'Bug reports sent to
+the kernel.org administrators will be ignored.'
+		end
+		p 'There is now a bugzilla setup at' do
+			a 'bugzilla.kernel.org', 'href' => 'http://bugzilla.kernel.org'
+			txt! '.
+Currently this is for reporting kernel version 2.6 bugs only.'
+		end
+		h2.mailinglist! 'Mailing list'
+		p 'The Linux kernel is discussed on the' do
+			em 'linux-kernel'
+			txt! 'mailing list at'
+			a 'href' => 'http://vger.kernel.org/' do
+				em 'vger.kernel.org'
+			end
+			txt! '. The FAQ
+is available at'
+			a 'href' => '/pub/linux/docs/lkml/' do
+				strong 'http://www.kernel.org/pub/linux/docs/lkml/'
+			end
+			txt! ',
+please read the FAQ before subscribing.'
+		end
+		p 'Although there is no official archive site, unofficial
+archives of the list can be found at:'
+		ul do
+			li do
+				a 'href' => 'http://marc.theaimsgroup.com/?l=linux-kernel' do
+					strong 'http://marc.theaimsgroup.com/?l=linux-kernel'
+				end
+			end
+			li do
+				a 'href' => 'http://www.ussg.iu.edu/hypermail/linux/kernel/' do
+					strong 'http://www.ussg.iu.edu/hypermail/linux/kernel/'
+				end
+			end
+		end
+		p 'and a summary service can be found at:'
+		ul do
+			li do
+				a 'href' => 'http://www.kernel-traffic.org/' do
+					strong 'http://www.kernel-traffic.org/'
+				end
+			end
+		end
+		h2.git! 'Development trees'
+		p 'The Linux kernel, as well as several other pieces of software,
+are maintained using the' do
+			a 'git', 'href' => '/pub/software/scm/git'
+			txt! 'source code control system.  For a more user-friendly wrapper around
+git, see'
+			a 'Cogito', 'href' => '/pub/software/scm/cogito'
+			txt! '.'
+		end
+		p 'See' do
+			a 'http://www.kernel.org/git', 'href' => '/git'
+			txt! 'for a list of
+git repositories on'
+			em 'kernel.org'
+			txt! '.'
+		end
+		h2.crypto! 'Cryptographic Software'
+		p 'Due to U.S. Exports Regulations, all
+cryptographic software on this site is subject to the following
+legal notice:'
+		blockquote 'This site includes publicly available
+encryption source code which, together with object code
+resulting from the compiling of publicly available source code,
+may be exported from the United States under License Exception
+"TSU" pursuant to 15 C.F.R. Section 740.13(e).'
+		p 'This legal notice applies to' do
+			em 'cryptographic software
+only.'
+			txt! 'Please see the'
+			a 'Bureau of Industry and Security', 'href' => 'http://www.bis.doc.gov/'
+			txt! 'for
+more information about current U.S. regulations.'
+		end
+		p 'Our servers are located in Corvallis, Oregon, Palo Alto and San
+Francisco, California, USA; use in violation of any applicable laws
+is prohibited.'
+		h2.contact! 'Comments'
+		p 'Before emailing kernel.org, please take a look at our' do
+			a 'kernel.org FAQ', 'href' => '/faq/'
+			txt! '.'
+		end
+		p 'For comments about' do
+			i 'the web pages'
+			txt! ', please send mail
+to'
+			a 'href' => 'mailto:webmaster@kernel.org' do
+				i 'webmaster@kernel.org'
+			end
+			txt! '.'
+		end
+		p 'For comments about' do
+			i 'the file archive'
+			txt! ', please send mail
+to'
+			a 'href' => 'mailto:ftpadmin@kernel.org' do
+				i 'ftpadmin@kernel.org'
+			end
+			txt! '.'
+		end
+		p do
+			b do
+				i 'Please do not send general Linux questions or bug
+reports to these addresses. We do not have the resources to reply
+to them. If your message does not relate to the operation of the
+Linux Kernel Archives, it will be deleted without action. Because
+of the volume of unsolicited email we receive, please add [KORG]
+to the subject to avoid accidental deletion. Additionally, any
+Content-Type other than text/plain will most likely be deleted
+without action.'
+			end
+		end
+		hr
+		p 'style' => 'text-align:center;' do
+			small 'This site is operated by the Linux Kernel Organization,
+Inc., a' do
+				a 'nonprofit corporation', 'href' => 'nonprofit.html'
+				txt! ', with
+support from the following sponsors.'
+			end
+		end
+		hr
+		p.sponsors! do
+			a 'href' => 'http://www.isc.org/' do
+				img 'src' => 'logos/hostedatisc.png', 'height' => '41', 'alt' => 'Internet Systems Consortium', 'width' => '84'
+			end
+			txt! '&nbsp;'
+			a 'href' => 'http://www.hp.com/' do
+				img 'src' => 'logos/hplogo.gif', 'height' => '55', 'alt' => 'HP', 'width' => '66'
+			end
+			txt! '&nbsp;'
+			a 'href' => 'http://www.linux-foundation.org/' do
+				img 'src' => 'logos/lf-med.gif', 'height' => '55', 'alt' => 'The Linux Foundation', 'width' => '106'
+			end
+			txt! '&nbsp;'
+			a 'href' => 'powered.html' do
+				img 'src' => 'logos/logo70-tran.png', 'height' => '71', 'alt' => 'Powered by Linux', 'width' => '66'
+			end
+			txt! '&nbsp;'
+			a 'href' => 'http://validator.w3.org/check/referer' do
+				img 'src' => 'logos/valid-xhtml10', 'height' => '31', 'alt' => 'Valid XHTML 1.0!', 'width' => '88'
+			end
+			br 'clear' => 'left'
+		end
+		p.trademark! 'Linux is a Registered Trademark of Linus Torvalds.' do
+			br
+			a '(Legal Notice)', 'href' => 'legal.html'
+		end
+		script 'src' => 'http://www.google-analytics.com/urchin.js', 'type' => 'text/javascript'
+		script '_uacct = "UA-1175126-1";
+_udn = "kernel.org";
+urchinTracker();', 'type' => 'text/javascript'
+	end
+end

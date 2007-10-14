@@ -1,0 +1,11 @@
+@foo = capture do
+	div do
+		img :src => '/images/image.png'
+		br
+		span.caption 'Taken at the location of the event'
+	end
+end
+
+h4 'Captured'
+self << @foo
+_'EOF'

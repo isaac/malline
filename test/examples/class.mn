@@ -1,0 +1,6 @@
+# These two things are the same
+div :class => 'page'
+div.page
+
+# You can even give more than one class
+div.foo.bar.many

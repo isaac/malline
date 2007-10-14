@@ -1,0 +1,6 @@
+div do
+	span 'text'
+	div 'foo' do
+		span 'bar', :style => 'color: red'
+	end
+end

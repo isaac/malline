@@ -1,0 +1,24 @@
+Malline
+=======
+
+See documentation on http://www.malline.org/
+
+Copyright © 2007 Riku Palomäki, riku@palomaki.fi
+Malline is released under GNU Lesser General Public License.
+
+
+Example template file images.mn:
+
+html do
+	_render :partial => 'head'
+	body do
+		div.images! "There are some images:" do
+			images.each do |im|
+				a(:href => img_path(im)) { img :src => im.url }
+				span.caption im.caption
+			end
+			_"No more images"
+		end
+		div.footer! { _render :partial => 'footer' }
+	end
+end
