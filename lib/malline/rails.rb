@@ -28,7 +28,7 @@ module ActionView
 			if handler == Malline::Base
 				@malline_is_active = true
 				h = handler.new(self)
-				h.set_path(@current_tpl_path)
+				h.set_path(@current_tpl_path) if @current_tpl_path
 				h.render(template, local_assigns)
 			else
 				@malline_is_active = false
