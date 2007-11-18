@@ -24,5 +24,6 @@ module Malline
 		def concat value
 			@view << value
 		end
+		alias_method :<<, :concat
 	end
 end

@@ -181,4 +181,12 @@ class MallineTest < Test::Unit::TestCase
 				Base.new(View.new).render(File.read(file))+"\n", file)
 		end
 	end
+
+	def test_erbout
+		string = ""
+		erb = ErbOut.new string
+		erb.concat 'Foo'
+		erb << 'Bar'
+		assert_equal('FooBar', string)
+	end
 end
