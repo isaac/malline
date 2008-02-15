@@ -1,4 +1,4 @@
-# Copyright © 2007 Riku Palomäki
+# Copyright © 2007,2008 Riku Palomäki
 #
 # This file is part of Malline.
 #
