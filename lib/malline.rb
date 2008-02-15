@@ -76,14 +76,15 @@ module Malline
 		# n is there to keep things compatible with Markaby
 		def render tpl = nil, local_assigns = {}, n = nil, &block
 			add_local_assigns local_assigns
-			tmp = @view.malline.run tpl, &block
-			tmp
+			@view.malline_is_active = true
+			@view.malline.run tpl, &block
 		end
 
 		def self.render tpl = nil, local_assigns = {}, &block
 			self.new.render(tpl, local_assigns, &block)
 		end
 
+		# TODO: These should also be able to disable
 		def definetags *tags
 			tags.each do |tag|
 				eval %{

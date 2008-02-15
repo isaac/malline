@@ -17,55 +17,70 @@
 
 module Malline
 	module ViewWrapper
+		attr_accessor :malline_is_active
+
+		# List of all methods that may override some custom view methods
+		# If is_malline?, then their _malline_ -prefix versions are called
+		@@malline_methods = %w{_erbout cache capture _ tag! << txt!}
+
+		def init_malline_methods
+			@malline_methods_inited = true
+			@@malline_methods.each do |m|
+				mf = m.gsub('<', 'lt')
+				eval %{def #{m}(*x, &b) is_malline? ? _malline_#{mf}(*x, &b) : super; end}
+			end
+		end
+
 		def malline opts = nil
 			if @malline
 				@malline.options.merge!(opts) if opts.is_a?(Hash)
 			else
 				@malline = Template.new(self, opts)
 			end
+			init_malline_methods unless @malline_methods_inited
 			@malline
 		end
 		
-		def _erbout
+		def _malline__erbout
 			@_erbout ||= ErbOut.new(self)
-			@_erbout
 		end
 
-		def cache name = {}, options = {}, &block
+		def _malline_cache name = {}, options = {}, &block
 			return block.call unless @controller.perform_caching
 			cache = @controller.read_fragment(name, options)
 
 			unless cache
-				cache = capture { block.call }
+				cache = _malline_capture { block.call }
 				@controller.write_fragment(name, cache, options)
 			end
 			@malline.add_unescaped_text cache
 		end
 
-		def capture &block
+		def _malline_capture &block
 			@malline.run &block
 		end
 
-		def _ *args
+		def _malline__ *args
 			@malline.add_text(*args)
 		end
-		alias_method :txt!, :_
+		alias_method :_malline_txt!, :_malline__
 
-		def << *args
+		def _malline_ltlt *args
 			@malline.add_unescaped_text *args
 		end
 
 		def method_missing s, *args, &block
+			return super unless is_malline?
 			helper = (s.to_s[0].chr == '_') ? s.to_s[1..255].to_sym : s.to_sym
 			if respond_to?(helper)
 				@malline.helper(helper, *args, &block)
 			else
 				return super if @malline.options[:strict]
-				tag! s, *args, &block
+				_malline_tag! s, *args, &block
 			end
 		end
 
-		def tag! *args, &block
+		def _malline_tag! *args, &block
 			@malline.tag *args, &block
 		end
 
