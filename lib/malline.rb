@@ -18,12 +18,13 @@
 require 'malline/view_proxy.rb'
 require 'malline/view_wrapper.rb'
 require 'malline/view_xhtml.rb'
-require 'malline/rails.rb'
 require 'malline/erb_out.rb'
 require 'malline/form_builder.rb'
 require 'malline/template.rb'
 
 module Malline
+	VERSION = '1.0.2'
+
 	# Template-handler class that is registered to ActionView and initialized by it.
 	class Base
 		# Default options for new instances, can be changed with setopt

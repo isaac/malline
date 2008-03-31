@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
+require 'malline' unless Kernel.const_defined?('Malline')
+
+ActionView::Base.register_template_handler 'mn', Malline::Base
+
 module ActionView
 	class Base
 		alias_method :orig_render_template, :render_template
@@ -37,5 +41,5 @@ module ActionView
 			@malline_is_active = old
 			tmp
 		end
-	end if const_defined?('Base')
+	end
 end

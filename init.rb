@@ -1,2 +1,3 @@
+# This file is required by Rails if using a Malline plugin
 require 'malline'
-ActionView::Base.register_template_handler 'mn', Malline::Base
+require 'malline/rails'

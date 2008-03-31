@@ -20,3 +20,47 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+summary = <<-EOF
+	Malline is a full-featured pure Ruby template system designed to be
+	a replacement for ERB views in Rails or any other framework. See
+	http://www.malline.org/ for more info.
+EOF
+
+desc = <<-EOF
+	Malline is a full-featured template system designed to be
+	a replacement for ERB views in Rails or any other framework.
+	It also includes standalone bin/malline to compile Malline
+	templates to XML in commandline. All Malline templates are
+	pure Ruby, see http://www.malline.org/ for more info.
+EOF
+
+begin
+	require 'rubygems'
+	require 'rake/gempackagetask'
+	PKG_FILES = FileList['lib/**/*.rb', 'bin/*', 'COPYING*', 'README', 'scripts/*rb', 'test/*', 'test/examples/*']
+	PKG_VERSION = File.read('README').scan(/^Malline (\d+\.\d+\.\d+)/).first.first
+	spec = Gem::Specification.new do |s|
+		s.author = 'Riku Palomäki'
+		s.autorequire = 'malline'
+		s.email = 'riku@palomaki.fi'
+		s.executables = ['malline']
+		s.extra_rdoc_files = ['README']
+		s.files = PKG_FILES.to_a
+		s.homepage = 'http://www.malline.org/'
+		s.name = 'malline'
+		s.rubyforge_project = 'malline'
+		s.summary = summary
+		s.test_file = 'test/malline_test.rb'
+		s.version = PKG_VERSION
+		s.description = desc
+	end
+
+	Rake::GemPackageTask.new(spec) do |pkg|
+		pkg.need_zip = true
+		pkg.need_tar = true
+	end
+rescue LoadError => e
+	warn e.message
+	warn 'Warning: Package building is disabled because of missing libs'
+end
