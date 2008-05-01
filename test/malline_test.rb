@@ -46,6 +46,9 @@ class View
 	def link_to *args
 		'link'
 	end
+	def zoo *args
+		'zoo output'
+	end
 end
 
 
@@ -55,10 +58,11 @@ class MallineTest < Test::Unit::TestCase
 
 	def test_simple
 		Base.setopt :strict => false, :xhtml => false do
-			assert_xml_equal('<foo id="a"><bar class="a b"/></foo>',
+			assert_xml_equal('<foo id="a"><bar class="a b"/>blabla</foo>',
 				Base.render do
 					foo.a! do
 						bar.a.b
+						_'blabla'
 					end
 				end
 			)
@@ -109,22 +113,29 @@ class MallineTest < Test::Unit::TestCase
 		end
 		b = Proc.new do
 			foo do
-				xxx :a => 'b' do
+				zoo :a => 'b' do
 					bar
 				end
+				_zoo
+				xoo.bar
 			end
 		end
 		out = tpl.render nil, &b
-		assert_xml_equal('<foo/>', out)
+		# zoo isn't rendered, because there is helper named zoo
+		assert_xml_equal('<foo>zoo output<xoo class="bar"/></foo>', out)
 
-		tpl.definetags :xxx
+		tpl.definetags :zoo
 		out = tpl.render nil, &b
-		assert_xml_equal('<foo><xxx a="b"><bar/></xxx></foo>', out)
+		assert_xml_equal('<foo>zoo output<xoo class="bar"/></foo>', out)
+
+		tpl.definetags! :zoo
+		out = tpl.render nil, &b
+		assert_xml_equal('<foo><zoo a="b"><bar/></zoo>zoo output<xoo class="bar"/></foo>', out)
 
 		out = Base.setopt :strict => false, :xhtml => false do
 			Base.render &b
 		end
-		assert_xml_equal('<foo/>', out)
+		assert_xml_equal('<foo><zoo a="b"><bar/></zoo><_zoo/><xoo class="bar"/></foo>', out)
 	end
 
 	def test_xhtml

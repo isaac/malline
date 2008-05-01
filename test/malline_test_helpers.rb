@@ -17,11 +17,6 @@
 
 require "rexml/document"
 
-module Kernel
-	def xxx *args
-	end
-end
-
 module MallineTestHelpers
 	include REXML
 	Image = Struct.new "Image", :id, :url, :caption

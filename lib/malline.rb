@@ -23,7 +23,8 @@ require 'malline/form_builder.rb'
 require 'malline/template.rb'
 
 module Malline
-	VERSION = '1.0.2'
+	# Always form ^\d+\.\d+\.\d+(-[^\s]*)?$
+	VERSION = '1.0.3-svn'
 
 	# Template-handler class that is registered to ActionView and initialized by it.
 	class Base
@@ -85,15 +86,12 @@ module Malline
 			self.new.render(tpl, local_assigns, &block)
 		end
 
-		# TODO: These should also be able to disable
-		def definetags *tags
-			tags.each do |tag|
-				eval %{
-					def @view.#{tag}(*args, &block)
-						tag!('#{tag}', *args, &block)
-					end
-				}
-			end
+		def definetags *args
+			@view.malline.definetags *args
+		end
+
+		def definetags! *args
+			@view.malline.definetags! *args
 		end
 
 		private

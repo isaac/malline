@@ -21,6 +21,7 @@ module Malline
 		attr_accessor :short_tag_excludes
 		attr_accessor :whitespace
 		attr_accessor :path
+		attr_accessor :helper_overrides
 
 		def initialize view, opts
 			@view = view
@@ -28,6 +29,7 @@ module Malline
 			@path = 'Malline template'
 			@options = opts
 			@short_tag_excludes = []
+			@helper_overrides = {}
 		end
 
 		# These two are stolen from ERB
@@ -62,7 +64,12 @@ module Malline
 		end
 
 		def helper helper, *args, &block
-			tmp = @view.send(helper, *args, &block)
+			helper = helper.to_sym
+			tmp = if h = @helper_overrides[helper]
+				h.call(*args, &block)
+			else
+				@view.send(helper, *args, &block)
+			end
 			@dom << ' ' if @whitespace
 			@dom << tmp.to_s
 			tmp
@@ -119,6 +126,27 @@ module Malline
 			tmp = []
 			execute tmp, tpl, &block
 			render tmp
+		end
+
+		# TODO: These should also be able to disable
+		def definetags! *tags
+			tags.flatten.each do |tag|
+				tag = tag.to_sym
+				@helper_overrides[tag] = @view.method(tag) if @view.respond_to?(tag)
+				define_tag! tag
+			end
+		end
+
+		def definetags *tags
+			tags.flatten.each{|tag| define_tag!(tag) unless @view.respond_to?(tag)}
+		end
+
+		def define_tag! tag
+			eval %{
+				def @view.#{tag}(*args, &block)
+					tag!('#{tag}', *args, &block)
+				end
+			}
 		end
 	end
 end
