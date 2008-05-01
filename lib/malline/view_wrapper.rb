@@ -71,7 +71,7 @@ module Malline
 
 		def method_missing s, *args, &block
 			return super unless is_malline?
-			helper = (s.to_s[0].chr == '_') ? s.to_s[1..255].to_sym : s.to_sym
+			helper = ((s.to_s[0] == ?_) ? s.to_s[1..-1] : s).to_sym
 			if respond_to?(helper)
 				@malline.helper(helper, *args, &block)
 			else
