@@ -27,7 +27,7 @@ module Malline
 	VERSION = '1.0.3-svn'
 
 	# Template-handler class that is registered to ActionView and initialized by it.
-	class Base
+	class Base < (defined?(ActionView) ? ActionView::TemplateHandler : Object)
 		# Default options for new instances, can be changed with setopt
 		@@options = { :strict => true, :xhtml => true, :encoding => 'UTF-8', :lang => 'en', :form_for_proxy => true }
 		attr_reader :view
