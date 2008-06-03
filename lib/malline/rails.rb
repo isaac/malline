@@ -17,7 +17,11 @@
 
 require 'malline' unless Kernel.const_defined?('Malline')
 
-ActionView::Base.register_template_handler 'mn', Malline::Base
+if ActionView::Base.respond_to?(:register_template_handler)
+	ActionView::Base.register_template_handler 'mn', Malline::Base
+else
+	ActionView::Template.register_template_handler 'mn', Malline::Base
+end
 
 module ActionView
 	class Base
