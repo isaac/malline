@@ -124,7 +124,11 @@ module Malline
 		# Execute and render a text or block
 		def run tpl = nil, &block
 			tmp = []
-			execute tmp, tpl, &block
+			if defined?(ActionView) && Rails::VERSION::STRING > "2.0.z"
+				execute tmp, tpl.source, &block
+			else
+				execute tmp, tpl, &block
+			end
 			render tmp
 		end
 

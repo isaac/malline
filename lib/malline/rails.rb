@@ -17,33 +17,32 @@
 
 require 'malline' unless Kernel.const_defined?('Malline')
 
-if ActionView::Base.respond_to?(:register_template_handler)
+if Rails::VERSION::STRING <= "2.0.z"
 	ActionView::Base.register_template_handler 'mn', Malline::Base
-else
-	ActionView::Template.register_template_handler 'mn', Malline::Base
-end
-
-module ActionView
-	class Base
-		alias_method :orig_render_template, :render_template
-		def render_template template_extension, template, file_path = nil, *rest
-			@current_tpl_path = file_path
-			orig_render_template(template_extension, template, file_path, *rest)
-		end
-
-		alias_method :orig_delegate_render, :delegate_render
-		def delegate_render(handler, template, local_assigns)
-			old = @malline_is_active
-			tmp = if handler == Malline::Base
-				h = handler.new(self)
-				h.set_path(@current_tpl_path) if @current_tpl_path
-				h.render(template, local_assigns)
-			else
-				@malline_is_active = false
-				orig_delegate_render(handler, template, local_assigns)
+	module ActionView
+		class Base
+			alias_method :orig_render_template, :render_template
+			def render_template template_extension, template, file_path = nil, *rest
+				@current_tpl_path = file_path
+				orig_render_template(template_extension, template, file_path, *rest)
 			end
-			@malline_is_active = old
-			tmp
+	
+			alias_method :orig_delegate_render, :delegate_render
+			def delegate_render(handler, template, local_assigns)
+				old = @malline_is_active
+				tmp = if handler == Malline::Base
+					h = handler.new(self)
+					h.set_path(@current_tpl_path) if @current_tpl_path
+					h.render(template, local_assigns)
+				else
+					@malline_is_active = false
+					orig_delegate_render(handler, template, local_assigns)
+				end
+				@malline_is_active = old
+				tmp
+			end
 		end
 	end
+else
+	ActionView::Template.register_template_handler 'mn', Malline::Base
 end
