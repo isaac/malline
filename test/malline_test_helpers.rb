@@ -16,6 +16,7 @@
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
 require "rexml/document"
+require 'malline.rb'
 
 module MallineTestHelpers
 	include REXML
@@ -50,3 +51,32 @@ module MallineTestHelpers
 	end
 end
 
+class Controller
+	def perform_caching
+		false
+	end
+end
+
+class Comment
+end
+
+class View
+	def initialize
+		@controller = Controller.new
+	end
+	def image_path(im)
+		"/images/#{im.is_a?(MallineTestHelpers::Image) ? im.id : 'img'}"
+	end
+	def truncate(str, size = 10)
+		str[0...size]
+	end
+	def render hash
+		Malline::Base.new(View.new).render File.read(File.join(File.dirname(__FILE__), hash[:partial].sub(/\//, '/_') + '.mn')) rescue ''
+	end
+	def link_to *args
+		'link'
+	end
+	def zoo *args
+		'zoo output'
+	end
+end

@@ -15,20 +15,20 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
-module Malline
-	# Since some parts of Rails use ERB directly instead of current template
-	# handler, we have to capture all that data.
-	#
-	# In practice the erb buffer object (named ActiveView::Base.erb_variable)
-	# is a string, where data is simply concatted.
-	class ErbOut
-		def initialize view
-			@view = view
-		end
-		# Redirect all data to view
-		def concat value
-			@view << value
-		end
-		alias_method :<<, :concat
+# Malline very incomplete Plugin interface.
+class Malline::Plugin
+	# Install a new plugin: Malline::WhatEverPlugin.install view
+	def self.install view
+		return if view.malline.plugins.include? self
+		self.do_install view
+		view.malline.plugins << self
+	end
+
+	protected
+	def self.do_install view
+		raise NotImplementedError.new
+	end
+	def self.do_uninstall view
+		raise NotImplementedError.new("#{self} cannot be uninstalled")
 	end
 end

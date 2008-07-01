@@ -17,73 +17,75 @@
 
 require 'malline/view_proxy.rb'
 require 'malline/view_wrapper.rb'
-require 'malline/view_xhtml.rb'
 require 'malline/erb_out.rb'
-require 'malline/form_builder.rb'
 require 'malline/template.rb'
+require 'malline/plugin.rb'
+require 'malline/plugins/xhtml.rb'
 
 module Malline
 	# Always form ^\d+\.\d+\.\d+(-[^\s]*)?$
-	VERSION = '1.0.3-svn'
+	VERSION = '1.1.0-svn'
 
-	# Template-handler class that is registered to ActionView and initialized by it.
-	class Base < (defined?(ActionView) ? ActionView::TemplateHandler : Object)
-		# Default options for new instances, can be changed with setopt
-		@@options = { :strict => true, :xhtml => true, :encoding => 'UTF-8', :lang => 'en', :form_for_proxy => true }
-		attr_reader :view
+	# Malline handler, always use Malline engine with this
+	# 	handler = Malline.new @view, :strict => false
+	# 	handler.
+	class Base
+		attr_accessor :malline
+
+		# Default options, can be changed with setopt
+		@@options = {
+			:strict => true,
+			:xhtml => true,
+			:encoding => 'UTF-8',
+			:lang => 'en',
+			:form_for_proxy => true
+		}
 
 		# First parameter is the view object (if any)
 		# Last parameter is optional options hash
-		def initialize(*opts)
+		def initialize *opts
 			@options = @@options.dup
 			@options.merge! opts.pop if opts.last.is_a?(Hash)
 
 			@view = opts.shift || Class.new
-			unless @view.is_a?(ViewWrapper)
-				@view.extend ViewWrapper
-				@view.malline @options
-				Malline::XHTML.load_plugin self if @options[:xhtml]
-			else
-				@view.malline @options
-			end
-
-			if @options[:form_for_proxy]
-				begin
-					ActionView::Base.default_form_builder = ::Malline::FormBuilder
-				rescue NameError
-				end
-			end
+			@view.extend ViewWrapper unless @view.is_a?(ViewWrapper)
+			@malline = @view.malline @options
 		end
 
-		def set_path path
-			@view.malline.path = path
+		# Get the current filename
+		def path 
+			@view.malline.path
 		end
 
+		def path= npath
+			@view.malline.path = npath
+		end
+
+		# for example:
+		# 	setopt :strict => false
+		#
+		# or:
+		# 	setopt :strict => false
+		#		something
+		# 	setopt :strict => true do
+		#   	something strict
+		# 	end
 		def self.setopt hash
-			output = nil
-			if block_given?
-				o = @@options.dup
-				@@options.merge!(hash) if hash
-				begin
-					output = yield
-				ensure
-					@@options = o
-				end
-			else
-				@@options.merge!(hash)
-			end
-			output
+			return @@options.merge!(hash) unless block_given?
+			old = @@options.dup
+			@@options.merge! hash if hash
+			yield
+		ensure
+			@@options = old if old
 		end
 
-		# n is there to keep things compatible with Markaby
-		def render tpl = nil, local_assigns = {}, n = nil, &block
+		def render tpl = nil, local_assigns = {}, &block
 			add_local_assigns local_assigns
-			@view.malline_is_active = true
 			@view.malline.run tpl, &block
 		end
 
 		def self.render tpl = nil, local_assigns = {}, &block
-			self.new.render(tpl, local_assigns, &block)
+			self.new.render tpl, local_assigns, &block
 		end
 
 		def definetags *args
@@ -95,10 +97,11 @@ module Malline
 		end
 
 		private
+		# Define hash as instance variables, for example { :foo => 'bar' }
+		# will work as @foo == 'bar' and foo == 'bar'
 		def add_local_assigns l
 			@view.instance_eval do
 				l.each { |key, value| instance_variable_set "@#{key}", value }
-				evaluate_assigns if respond_to?(:evaluate_assigns, true)
 				class << self; self; end.send(:attr_accessor, *(l.keys))
 			end
 		end

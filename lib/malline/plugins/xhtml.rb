@@ -15,7 +15,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
-module Malline::XHTML
+# Quite stupid plugin for XHTML, we should be able to do this only with a DTD
+# or similar.
+#
+# Defines all usable tags, list which one can be self-close, defines a short
+# cut tag *xhtml*. Also makes sure that there is some necessary elements in
+# the document.
+class Malline::XHTML < Malline::Plugin
 	CUSTOM_TAGS = %w{head title meta}
 
 	# grep ELEMENT xhtml1-transitional.dtd | cut -d' ' -f2 | tr "\n" " "
@@ -63,9 +69,9 @@ module Malline::XHTML
 		end
 	end
 
-	def self.load_plugin base
-		base.definetags *XHTML_TAGS
-		base.view.malline.short_tag_excludes += SHORT_TAG_EXCLUDES
-		base.view.extend Tags
+	def self.do_install view
+		view.malline.definetags! XHTML_TAGS
+		view.malline.short_tag_excludes += SHORT_TAG_EXCLUDES
+		view.extend Tags
 	end
 end

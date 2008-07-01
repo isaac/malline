@@ -16,12 +16,25 @@
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
 module Malline
+	# Capture form elements directly from FormBuilder, so that there is no
+	# need to specially render any elements.
+	# In other words, with our own FormBuilder-wrapper we can do this:
+	# 	form_for :comment, Comment.new, :url => edit_url do |f|
+	# 		f.text_field :name
+	# 	end
+	# instead of
+	# 	..
+	# 	self << f.text_field(:name)
 	class FormBuilder
-		def initialize *args
+		# Wrap the Rails FormBuilder in @builder
+		def initialize *args, &block
 			@view = eval('self', args.last)
+			# We could be in a non-Malline view
 			@view = nil unless @view.respond_to?(:is_malline?) && @view.is_malline?
-			@builder = ::ActionView::Helpers::FormBuilder.new(*args)
+			@builder = ::ActionView::Helpers::FormBuilder.new(*args, &block)
 		end
+		# Render every f.foo -method to view, unless we aren't using
+		# Malline template now
 		def method_missing *args, &block
 			if @view
 				@view << @builder.send(*args, &block)

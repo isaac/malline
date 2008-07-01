@@ -16,33 +16,31 @@
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'malline' unless Kernel.const_defined?('Malline')
+require 'malline/form_builder.rb'
 
 if Rails::VERSION::STRING <= "2.0.z"
-	ActionView::Base.register_template_handler 'mn', Malline::Base
-	module ActionView
-		class Base
-			alias_method :orig_render_template, :render_template
-			def render_template template_extension, template, file_path = nil, *rest
-				@current_tpl_path = file_path
-				orig_render_template(template_extension, template, file_path, *rest)
-			end
-	
-			alias_method :orig_delegate_render, :delegate_render
-			def delegate_render(handler, template, local_assigns)
-				old = @malline_is_active
-				tmp = if handler == Malline::Base
-					h = handler.new(self)
-					h.set_path(@current_tpl_path) if @current_tpl_path
-					h.render(template, local_assigns)
-				else
-					@malline_is_active = false
-					orig_delegate_render(handler, template, local_assigns)
-				end
-				@malline_is_active = old
-				tmp
-			end
-		end
-	end
+	require 'malline/adapters/rails-2.0'
 else
-	ActionView::Template.register_template_handler 'mn', Malline::Base
+	require 'malline/adapters/rails-2.1'
 end
+
+# Activate our FormBuilder wrapper, so we can use forms more easily
+ActionView::Base.default_form_builder = Malline::FormBuilder
+
+module Malline::ViewWrapper
+	@@malline_methods << 'cache'
+
+	# Rails caching
+	def _malline_cache name = {}, options = {}, &block
+		return block.call unless @controller.perform_caching
+		cache = @controller.read_fragment(name, options)
+
+		unless cache
+			cache = _malline_capture { block.call }
+			@controller.write_fragment(name, cache, options)
+		end
+		@malline.add_unescaped_text cache
+	end
+end
+
+

@@ -19,38 +19,6 @@ $: << t
 $: << File.join(t, 'lib')
 require 'test/unit'
 require 'test/malline_test_helpers.rb'
-require 'malline.rb'
-
-class Controller
-	def perform_caching
-		false
-	end
-end
-
-class Comment
-end
-
-class View
-	def initialize
-		@controller = Controller.new
-	end
-	def image_path(im)
-		"/images/#{im.is_a?(MallineTestHelpers::Image) ? im.id : 'img'}"
-	end
-	def truncate(str, size = 10)
-		str[0...size]
-	end
-	def render hash
-		Malline::Base.new(View.new).render File.read(File.join(File.dirname(__FILE__), hash[:partial].sub(/\//, '/_') + '.mn')) rescue ''
-	end
-	def link_to *args
-		'link'
-	end
-	def zoo *args
-		'zoo output'
-	end
-end
-
 
 class MallineTest < Test::Unit::TestCase
 	include Malline
