@@ -44,7 +44,6 @@ begin
 	PKG_VERSION = File.read('README').scan(/^Malline (\d+\.\d+\.\d+)/).first.first
 	spec = Gem::Specification.new do |s|
 		s.author = 'Riku Palomäki'
-		s.autorequire = 'malline'
 		s.email = 'riku@palomaki.fi'
 		s.executables = ['malline']
 		s.extra_rdoc_files = ['README']
@@ -56,6 +55,7 @@ begin
 		s.test_file = 'test/malline_test.rb'
 		s.version = PKG_VERSION
 		s.description = desc
+		s.has_rdoc = true
 	end
 
 	Rake::GemPackageTask.new(spec) do |pkg|
