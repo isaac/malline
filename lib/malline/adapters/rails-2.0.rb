@@ -29,14 +29,28 @@ module ActionView
 			orig_render_template(template_extension, template, file_path, *rest)
 		end
 
+		alias_method :orig_compile_and_render_template, :compile_and_render_template
+		def compile_and_render_template handler, *rest
+			if self.respond_to? :is_malline?
+				old, @malline_is_active = is_malline?, false
+				output = orig_compile_and_render_template handler, *rest
+				@malline_is_active = old
+				output
+			else
+				@malline_is_active = false
+				orig_compile_and_render_template handler, *rest
+			end
+		end
+
 		alias_method :orig_delegate_render, :delegate_render
 		# Update the current file to malline and tell Malline to be deactivated
 		# if there is a non-Malline partial inside Malline template.
 		def delegate_render(handler, template, local_assigns)
-			old = @malline_is_active
+			old = is_malline?
 			tmp = if handler == Malline::Base
 				h = handler.new(self)
-				h.view.malline.path = @current_tpl_path if @current_tpl_path
+				h.path = @current_tpl_path if @current_tpl_path
+				@malline_is_active = true
 				h.render(template, local_assigns)
 			else
 				@malline_is_active = false
@@ -47,3 +61,12 @@ module ActionView
 		end
 	end
 end
+
+module Malline::ViewWrapper
+	# Activate Malline if we are not using ActionView::Base or if
+	# the current template is a Malline template
+	def is_malline?
+		@malline_is_active.nil? ? true : @malline_is_active
+	end
+end
+
