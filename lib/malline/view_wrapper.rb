@@ -19,8 +19,6 @@ module Malline
 	# ViewWrapper is extended into used view object, like ActiveView::Base.
 	# Every method in ViewWrapper will pollute the original namespace.
 	module ViewWrapper
-		attr_accessor :malline_is_active
-
 		# List of all methods that may override some custom view methods
 		# If is_malline?, then their _malline_ -prefix versions are called
 		@@malline_methods = %w{_erbout capture _ tag! << txt!}
@@ -89,9 +87,9 @@ module Malline
 			@malline.tag *args, &block
 		end
 
-		# Shortcut for checking whether we are in a Malline template
+		# Are we in a Malline template
 		def is_malline?
-			@malline_is_active
+			true
 		end
 	end
 end

@@ -155,9 +155,7 @@ module Malline
 		def run tpl = nil, &block
 			init
 			tmp = []
-			old, @view.malline_is_active = @view.malline_is_active, true
 			execute tmp, tpl, &block
-			@view.malline_is_active = old
 			render tmp
 		end
 
