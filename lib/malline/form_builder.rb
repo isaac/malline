@@ -29,14 +29,12 @@ module Malline
 		# Wrap the Rails FormBuilder in @builder
 		def initialize *args, &block
 			@view = eval('self', args.last)
-			# We could be in a non-Malline view
-			@view = nil unless @view.respond_to?(:is_malline?) && @view.is_malline?
 			@builder = ::ActionView::Helpers::FormBuilder.new(*args, &block)
 		end
 		# Render every f.foo -method to view, unless we aren't using
 		# Malline template now
 		def method_missing *args, &block
-			if @view
+			if @view && @view.is_malline?
 				@view << @builder.send(*args, &block)
 			else
 				@builder.send(*args, &block)
