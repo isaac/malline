@@ -1,11 +1,12 @@
 COPYING
 COPYING.LESSER
-HISTORY.txt
-MANIFEST.txt
+History.txt
+Manifest.txt
 README
 README.txt
 Rakefile
 bin/malline
+github.rb
 init.rb
 lib/malline.rb
 lib/malline/adapters/rails-2.0.rb
@@ -18,6 +19,7 @@ lib/malline/rails.rb
 lib/malline/template.rb
 lib/malline/view_proxy.rb
 lib/malline/view_wrapper.rb
+malline.gemspec
 scripts/html2mn.rb
 test/examples/_action.mn
 test/examples/_action.target
