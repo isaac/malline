@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Malline.  If not, see <http://www.gnu.org/licenses/>.
 
-ActionView::Base.register_template_handler 'mn', Malline::Base
+ActionView::Base.register_template_handler 'rb', Malline::Base
 module ActionView
 	# We need to redefine some ActionView::Base methods, Since Rails 2.0 doesn't
 	# offer any better way to do some things.

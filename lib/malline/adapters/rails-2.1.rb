@@ -100,4 +100,4 @@ else
 	end
 end
 
-ActionView::Template.register_template_handler 'mn', Malline::RailsHandler
+ActionView::Template.register_template_handler 'rb', Malline::RailsHandler
