@@ -1,4 +1,3 @@
-(in /Users/isaac/src/malline)
 Gem::Specification.new do |s|
   s.name = %q{malline}
   s.version = "1.1.0"
@@ -16,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{malline}
   s.rubygems_version = %q{1.2.0}
-  s.summary = nil
+  s.summary = "Malline is a full-featured pure Ruby template system designed to be a replacement for ERB views in Rails or any other framework"
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
