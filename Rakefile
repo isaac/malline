@@ -70,5 +70,5 @@ end
 require 'hoe'
 
 Hoe.new('malline', '1.1.0') do |p|
-  p.developer('Riku Palomäki', 'riku@palomaki.fi')
+  p.developer 'Riku Palomäki', 'riku@palomaki.fi'
 end

@@ -1,5 +1,14 @@
-Malline 1.1.0-svn
-=================
+= Malline 1.1.0-svn
+
+* http://www.malline.org/
+
+== DESCRIPTION:
+
+Malline is a full-featured template system designed to be
+a replacement for ERB views in Rails or any other framework.
+It also includes standalone bin/malline to compile Malline
+templates to XML in commandline. All Malline templates are
+pure Ruby, see http://www.malline.org/ for more info.
 
 See documentation on http://www.malline.org/
 
